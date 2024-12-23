@@ -1,8 +1,36 @@
--- Adds git related signs to the gutter, as well as utilities for managing changes
--- NOTE: gitsigns is already included in init.lua but contains only the base
--- config. This will add also the recommended keymaps.
-
 return {
+  {
+    'rmagatti/auto-session',
+    config = function()
+      local auto_session = require 'auto-session'
+
+      auto_session.setup {
+        auto_restore_enabled = false,
+        auto_session_suppress_dirs = { '~/', '~/Dev/', '~/Downloads', '~/Documents', '~/Desktop/' },
+      }
+
+      local keymap = vim.keymap
+
+      keymap.set('n', '<leader>wr', '<cmd>SessionRestore<CR>', { desc = 'Restore session for cwd' }) -- restore last workspace session for current directory
+      keymap.set('n', '<leader>ws', '<cmd>SessionSave<CR>', { desc = 'Save session for auto session root dir' }) -- save workspace session for current working directory
+    end,
+  },
+  {
+    'tpope/vim-fugitive',
+    config = function()
+      -- Define key bindings for Fugitive under <leader>g
+      vim.keymap.set('n', '<leader>gs', '<cmd>Git<CR>', { desc = 'Open Git status' })
+      vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<CR>', { desc = 'Commit changes' })
+      vim.keymap.set('n', '<leader>gp', '<cmd>Git push<CR>', { desc = 'Push changes' })
+      vim.keymap.set('n', '<leader>gP', '<cmd>Git pull<CR>', { desc = 'Pull changes' })
+      vim.keymap.set('n', '<leader>gb', '<cmd>Git branch<CR>', { desc = 'List branches' })
+      vim.keymap.set('n', '<leader>gd', '<cmd>Gdiffsplit<CR>', { desc = 'Open Git diff' })
+      vim.keymap.set('n', '<leader>gl', '<cmd>Glog<CR>', { desc = 'Show Git log' })
+      vim.keymap.set('n', '<leader>gr', '<cmd>Gread<CR>', { desc = 'Read file from Git' })
+      vim.keymap.set('n', '<leader>gw', '<cmd>Gwrite<CR>', { desc = 'Write file to Git (Stage)' })
+      vim.keymap.set('n', '<leader>gx', '<cmd>Gdelete<CR>', { desc = 'Delete file from Git' })
+    end,
+  },
   {
     'lewis6991/gitsigns.nvim',
     opts = {
