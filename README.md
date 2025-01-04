@@ -44,4 +44,4 @@ this scratchpad is for me to keep track of the todos in one spot heehee
  - [ ] ghostty also needs some twweakin:
     - [ ] split management keybinds. 
     - [ ] tab management keybinds.
-    - [ ] nushell prompt is broken on start.
+- [ ] nushell needs the tweakin.
