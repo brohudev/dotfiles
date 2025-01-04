@@ -13,7 +13,7 @@ them be the config files for the most used programs in my day to day workflow:
             - tree-parser
             - linter
             - autohighlighter
-            - [coming soon] session management and project bookmarks
+            - session management and project bookmarks
         - editorcore contains qol plugins for the overall experience
             - mini.nvim
             - auto formatter that auto formats on write
@@ -37,7 +37,6 @@ lol (lots of love)
 ---
 this scratchpad is for me to keep track of the todos in one spot heehee
 
-- [ ] install session management and bookmark the project folders
 - [ ] fix the broken markdown thingy it looks like the linter for it is broke
 - [ ] make cosmetic changes to make the tabs and neotree bearable. also move neotree to the right side. 
 - [ ] fix the horrible mess of the whichkey bindings and mappings and create a coherent binding scheme in keymaps where you set all the keymaps for all the everything instead of doing it in every single plugin manually. 

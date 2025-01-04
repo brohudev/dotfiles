@@ -147,7 +147,16 @@ let light_theme = {
 
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
-    show_banner: true # true or false to enable or disable the welcome banner at startup
+          shell_integration: {
+            osc2: false
+            osc7: false
+            osc8: false
+            osc9_9: false
+            osc133: false
+            osc633: false
+            reset_application_mode: false
+          }
+         show_banner: true # true or false to enable or disable the welcome banner at startup
 
     ls: {
         use_ls_colors: true # use the LS_COLORS environment variable to colorize output
