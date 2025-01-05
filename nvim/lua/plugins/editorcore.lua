@@ -1,6 +1,11 @@
 return {
   {
     'rmagatti/auto-session',
+    lazy = false,
+    priority = 1000, -- High priority
+    dependencies = {
+      'nvim-telescope/telescope.nvim', -- Since it uses session-lens
+    },
     config = function()
       require('auto-session').setup {
         auto_session_suppress_dirs = { '~/', '~/Downloads', '/' },
@@ -11,6 +16,10 @@ return {
           previewer = false,
         },
       }
+      vim.keymap.set('n', '<Leader>ls', require('auto-session.session-lens').search_session, {
+        noremap = true,
+        desc = 'load auto session fzf',
+      })
     end,
   },
   {
