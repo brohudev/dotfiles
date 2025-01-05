@@ -37,10 +37,12 @@ lol (lots of love)
 ---
 this scratchpad is for me to keep track of the todos in one spot heehee
 
-- [ ] fix the broken markdown thingy it looks like the linter for it is broke
-- [ ] make cosmetic changes to make the tabs and neotree bearable. also move neotree to the right side. 
-- [ ] fix the horrible mess of the whichkey bindings and mappings and create a coherent binding scheme in keymaps where you set all the keymaps for all the everything instead of doing it in every single plugin manually. 
-    - [ ] need the following keybinds mapped and tied to whichkey: buffer management, window management,
+- [ ] fix vale its giving exit code 2
+- [ ] read and configure the lsp properly
+- [ ] implement code folding
+- [ ] read and implement the linters for everything
+- [ ] configure the auto formatter to work with all the languages. 
+- [ ] auto session is broken :(. fix it somehow?
  - [ ] ghostty also needs some twweakin:
     - [ ] split management keybinds. 
     - [ ] tab management keybinds.
