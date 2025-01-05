@@ -3,7 +3,7 @@ return {
     'rmagatti/auto-session',
     config = function()
       require('auto-session').setup {
-        auto_session_suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+        auto_session_suppress_dirs = { '~/', '~/Downloads', '/' },
         session_lens = {
           buftypes_to_ignore = {},
           load_on_setup = true,
@@ -11,10 +11,6 @@ return {
           previewer = false,
         },
       }
-
-      vim.keymap.set('n', '<Leader>ls', require('auto-session.session-lens').search_session, {
-        noremap = true,
-      })
     end,
   },
   {
@@ -74,29 +70,14 @@ return {
         --
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = cmp.mapping.preset.insert {
-          -- Select the [n]ext item
-          ['<C-n>'] = cmp.mapping.select_next_item(),
-          -- Select the [p]revious item
-          ['<C-p>'] = cmp.mapping.select_prev_item(),
-
           -- Scroll the documentation window [b]ack / [f]orward
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-
-          -- Accept ([y]es) the completion.
-          --  This will auto-import if your LSP supports it.
-          --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
-
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
           ['<CR>'] = cmp.mapping.confirm { select = true },
           ['<Tab>'] = cmp.mapping.select_next_item(),
           ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
-          -- Manually trigger a completion from nvim-cmp.
-          --  Generally you don't need this, because nvim-cmp will display
-          --  completions whenever it has completion options available.
           ['<C-Space>'] = cmp.mapping.complete {},
 
           ['<C-l>'] = cmp.mapping(function()
@@ -437,19 +418,7 @@ return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
-      -- Better Around/Inside textobjects
-      --
-      -- Examples:
-      --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-      --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
-
-      -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      --
-      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-      -- - sd'   - [S]urround [D]elete [']quotes
-      -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
     end,
   },
@@ -470,17 +439,11 @@ return {
     },
   },
   {
-    -- NOTE: Yes, you can install new plugins here!
     'mfussenegger/nvim-dap',
-    -- NOTE: And you can specify dependencies as well
     dependencies = {
       -- Creates a beautiful debugger UI
       'rcarriga/nvim-dap-ui',
-
-      -- Required dependency for nvim-dap-ui
       'nvim-neotest/nvim-nio',
-
-      -- Installs the debug adapters for you
       'williamboman/mason.nvim',
       'jay-babu/mason-nvim-dap.nvim',
 
@@ -601,19 +564,12 @@ return {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
         'nvim-telescope/telescope-fzf-native.nvim',
-
-        -- `build` is used to run some command when the plugin is installed/updated.
-        -- This is only run then, not every time Neovim starts up.
         build = 'make',
-
-        -- `cond` is a condition used to determine whether this plugin should be
-        -- installed and loaded.
         cond = function()
           return vim.fn.executable 'make' == 1
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
@@ -676,43 +632,5 @@ return {
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
     end,
-  },
-  {
-    'nvim-neo-tree/neo-tree.nvim',
-    version = '*',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
-      'MunifTanjim/nui.nvim',
-    },
-    cmd = 'Neotree',
-
-    keys = {
-      { '<leader>fe', ':Neotree toggle<CR>', desc = '[F]ile [E]xplorer - Toggle', silent = true },
-      { '<leader>ff', ':Neotree focus<CR>', desc = '[F]ile [F]ocus - Focus on NeoTree', silent = true },
-      { '<leader>fc', ':Neotree close<CR>', desc = '[F]ile [C]lose - Close NeoTree', silent = true },
-      { '<leader>fr', ':Neotree refresh<CR>', desc = '[F]ile [R]efresh - Refresh NeoTree', silent = true },
-      { '<leader>fs', ':Neotree show<CR>', desc = '[F]ile [S]how - Show NeoTree', silent = true },
-      { '<leader>fm', ':Neotree action move<CR>', desc = '[F]ile [M]ove - Move a file/directory', silent = true },
-      { '<leader>fM', ':Neotree action copy<CR>', desc = '[F]ile [C]opy - Copy a file/directory', silent = true },
-      { '<leader>fd', ':Neotree action delete<CR>', desc = '[F]ile [D]elete - Delete a file/directory', silent = true },
-      { '<leader>frn', ':Neotree action rename<CR>', desc = '[F]ile [R]e[N]ame - Rename a file/directory', silent = true },
-      { '<leader>fn', ':Neotree action new<CR>', desc = '[F]ile [N]ew - Create a new file/directory', silent = true },
-      { '<leader>fu', ':Neotree action up<CR>', desc = '[F]ile [U]p - Go up one directory', silent = true },
-      { '<leader>fb', ':Neotree action back<CR>', desc = '[F]ile [B]ack - Go back to the previous folder', silent = true },
-    },
-    opts = {
-      filesystem = {
-        follow_current_file = true,
-        hijack_netrw = true,
-        use_libuv_file_watcher = true,
-        filtered_items = {
-          visible = true,
-          show_hidden_count = true,
-          hide_dotfiles = false,
-          hide_gitignored = false,
-        },
-      },
-    },
   },
 }
