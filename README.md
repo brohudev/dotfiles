@@ -20,10 +20,10 @@ them be the config files for the most used programs in my day to day workflow:
             - blankline and auto bracket closer
             - telescope fuzzy finder. 
         - vcscore contains git and its plugins that replace the builtin vs code git ui. 
-- nushell:
-    - moving over from bash. this is a years long process but for now i have the file so i can easily make changes to it. 
-- [coming soon] ghostty
-    - better terminal editor. its multiplexing combined with nvim session management will effectively fully replace my past vsc workflow. 
+- Bash:
+    - had a short stint with nushell but it just wasnt playing nice with ghostty.
+- ghostty
+    - better terminal editor because it has like fifteen lines of config, of which 11 are the theme. the rest are a few minor changes to the ui.
 
 feel free to use them for whatever you wish?
 
@@ -42,8 +42,6 @@ this scratchpad is for me to keep track of the todos in one spot heehee
 - [ ] implement code folding
 - [ ] read and implement the linters for everything
 - [ ] configure the auto formatter to work with all the languages. 
-- [ ] auto session is broken :(. fix it somehow?
  - [ ] ghostty also needs some twweakin:
     - [ ] split management keybinds. 
     - [ ] tab management keybinds.
-- [ ] nushell needs the tweakin.
