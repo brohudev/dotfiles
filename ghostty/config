@@ -101,4 +101,3 @@ keybind = super+v=paste_from_clipboard
 mouse-hide-while-typing = true
 focus-follows-mouse = true
 gtk-single-instance = true
-gtk-wide-tabs = false
