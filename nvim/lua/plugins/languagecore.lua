@@ -18,9 +18,9 @@ return {
         callback = 1,
         continuous = 1,
         executable = 'latexmk',
+        --added useless comment for the commit streak
         options = {
-          '-lualatex',
-          '-pdf',
+          '-xelatex', -- Use xelatex instead of pdflatex
           '-verbose',
           '-file-line-error',
           '-synctex=1',
