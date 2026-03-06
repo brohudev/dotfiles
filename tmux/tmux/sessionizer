@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Fuzzy-pick a project directory and create/attach a named tmux session.
+# Requires: fzf  (sudo dnf install fzf)
+#
+# Install: ln -s ~/.config/tmux/sessionizer ~/.local/bin/tmux-sessionizer
+#          chmod +x ~/.local/bin/tmux-sessionizer
+
+selected=$(find \
+  ~/projects/personal \
+  ~/treasurechest/Startup \
+  ~/projects/pxq \
+  ~/.config \
+  -mindepth 1 -maxdepth 1 -type d 2>/dev/null \
+  | fzf --prompt="  project: " \
+        --border=rounded \
+        --height=40% \
+        --preview="ls {}")
+
+[ -z "$selected" ] && exit 0
+
+session_name=$(basename "$selected" | tr ' .' '_')
+
+if ! tmux has-session -t="$session_name" 2>/dev/null; then
+  tmux new-session -ds "$session_name" -c "$selected"
+fi
+
+# Switch if inside tmux, attach if outside
+if [ -n "$TMUX" ]; then
+  tmux switch-client -t "$session_name"
+else
+  tmux attach-session -t "$session_name"
+fi

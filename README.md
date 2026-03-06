@@ -30,18 +30,19 @@ Config files for my daily workflow. Feel free to use them however you like.
 ```sh
 git clone https://github.com/your-username/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-stow -t ~/.config kitty neovim ghostty bash
+stow -t ~/.config kitty nvim ghostty tmux
+```
+
+### tmux sessionizer
+```sh
+# symlink sessionizer into PATH
+ln -s ~/.config/tmux/sessionizer ~/.local/bin/tmux-sessionizer
+
+# install fzf (required by sessionizer)
+sudo dnf install fzf tmux
 ```
 
 ## ✅ TODO  
-- [ ] Fix Vale (exit code 2)  
-- [ ] Configure LSP properly  
-- [ ] Implement code folding  
-- [ ] Set up linters for all languages  
-- [ ] Configure auto-formatting across languages  
-- [ ] Ghostty tweaks:  
-  - [ ] Split management keybinds  
-  - [ ] Tab management keybinds  
 
 ## 📝 License  
 This project is licensed under the [MIT License](LICENSE).  
