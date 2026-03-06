@@ -352,7 +352,6 @@ return {
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'ahmedkhalf/project.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
@@ -365,12 +364,6 @@ return {
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
-      require('project_nvim').setup {
-        detection_methods = { 'lsp', 'pattern' },
-        patterns = { '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json' },
-        scope_chdir = 'tab',
-        silent_chdir = true,
-      }
       local actions = require 'telescope.actions'
       require('telescope').setup {
 
@@ -392,7 +385,6 @@ return {
       -- Enable Telescope extensions
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension, 'projects')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -410,16 +402,6 @@ return {
       end, { desc = '[S]earch [N]eovim config' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Buffers' })
       vim.keymap.set('n', '<leader>?', builtin.keymaps, { desc = 'Fuzzy find keybinds (cheat sheet)' })
-
-      -- Project switching (tab-scoped). In picker: Esc then <leader>d delete, <leader>f find, <leader>s grep
-      local project_picker = require 'project_picker'
-      vim.keymap.set('n', '<leader>pp', function()
-        vim.cmd.tabnew()
-        project_picker.open()
-      end, { desc = '[P]roject: open in new tab' })
-      vim.keymap.set('n', '<leader>ps', function()
-        project_picker.open()
-      end, { desc = '[P]roject: switch in current tab' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()

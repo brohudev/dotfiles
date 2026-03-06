@@ -29,42 +29,6 @@ vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<CR>', { desc = '[B]uffer [D]elet
 vim.keymap.set('n', '<leader>tn', '<cmd>tabnext<CR>', { desc = '[T]ab [N]ext' })
 vim.keymap.set('n', '<leader>tp', '<cmd>tabprevious<CR>', { desc = '[T]ab [P]revious' })
 
--- Remove current folder from project list
-vim.keymap.set('n', '<leader>pd', function()
-  local history = require 'project_nvim.utils.history'
-  local cwd = vim.fn.getcwd()
-  local projects = history.get_recent_projects()
-  local found = false
-  for _, p in ipairs(projects) do
-    if p == cwd then
-      found = true
-      break
-    end
-  end
-  history.delete_project { value = cwd }
-  -- Also remove from session_projects (e.g. temp added via <leader>pa)
-  local new_session = {}
-  for _, p in ipairs(history.session_projects) do
-    if p ~= cwd then
-      table.insert(new_session, p)
-    end
-  end
-  history.session_projects = new_session
-  vim.notify(found and ('Removed: ' .. cwd) or 'Not in project list', vim.log.levels.INFO)
-end, { desc = '[P]roject: [D]elete current from list' })
-
--- Add current folder as project (shows in <leader>pp picker)
-vim.keymap.set('n', '<leader>pa', function()
-  local project = require 'project_nvim.project'
-  local history = require 'project_nvim.utils.history'
-  local cwd = vim.fn.getcwd()
-  if vim.fn.isdirectory(cwd) == 1 then
-    table.insert(history.session_projects, cwd)
-    project.set_pwd(cwd, 'manual')
-    vim.notify('Added project: ' .. cwd, vim.log.levels.INFO)
-  end
-end, { desc = '[P]roject: [A]dd current folder' })
-
 -- Run commands (edit nvim/lua/run_commands.lua to customize)
 vim.keymap.set('n', '<leader>rr', function()
   require('run_commands').pick()
