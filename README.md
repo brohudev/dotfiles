@@ -1,47 +1,49 @@
-# Dotfiles :3
+# Dotfiles :3  
 
-them be the config files for the most used programs in my day to day workflow:
-- kitty
-    - purely there because it is better than gnome terminal... until ghostty releases. 
-- neovim
-    - current replacement for vscode, will pair down the config in the future as I need fewer and fewer things. 
-    - list of plugins and what they do: 
-        - themeing contains the status bar, the colorscheme, and other such ui elements. 
-        - editorcorecore contains the core editor functionality that makes my switch easier: (as you can see by the line count of this file it is already due for a breakup into smaller chunks)
-            - an lsp
-            - a debugger
-            - tree-parser
-            - linter
-            - autohighlighter
-            - session management and project bookmarks
-        - editorcore contains qol plugins for the overall experience
-            - mini.nvim
-            - auto formatter that auto formats on write
-            - blankline and auto bracket closer
-            - telescope fuzzy finder. 
-        - vcscore contains git and its plugins that replace the builtin vs code git ui. 
-- Bash:
-    - had a short stint with nushell but it just wasnt playing nice with ghostty.
-- ghostty
-    - better terminal editor because it has like fifteen lines of config, of which 11 are the theme. the rest are a few minor changes to the ui.
+Config files for my daily workflow. Feel free to use them however you like.  
 
-feel free to use them for whatever you wish?
+## 🖥️ System Setup  
+- **OS:** [Fedora Workstation](https://getfedora.org/workstation/)  
+- **DE/WM:** [GNOME](https://www.gnome.org/) & [Hyprland](https://hyprland.org/)  
 
+## 📦 Included Configs  
+### 🖥️ Terminal  
+- **[Kitty](https://sw.kovidgoyal.net/kitty/)** – Better than GNOME Terminal (until [Ghostty](https://ghostty.io/) releases).  
+- **[Ghostty](https://ghostty.io/)** – Minimal terminal with only 15 lines of config.  
 
+### ✍️ Editor  
+- **[Neovim](https://neovim.io/)** – VS Code replacement. Config will be trimmed down over time.  
+#### 🔌 Plugins Breakdown  
+- **Themeing** – Status bar, colorscheme, and UI elements.  
+- **Editor Core** – Essential plugins for a smooth transition from VS Code.  
+  - LSP, debugger, tree-sitter, linter, syntax highlighter  
+  - Session management, project bookmarks  
+- **Quality of Life** –  
+  - `mini.nvim`, auto-format on save, bracket closing, blankline  
+  - `telescope.nvim` fuzzy finder  
+- **Version Control** – Git UI replacement (`vim-fugitive`, `gitsigns.nvim`)  
 
-lol (lots of love)
+### 🖥️ Shell  
+- **Bash** – Used after a short stint with Nushell.  
 
+## 🛠 Installation with Stow  
+```sh
+git clone https://github.com/your-username/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+stow -t ~/.config kitty neovim ghostty bash
+```
 
+## ✅ TODO  
+- [ ] Fix Vale (exit code 2)  
+- [ ] Configure LSP properly  
+- [ ] Implement code folding  
+- [ ] Set up linters for all languages  
+- [ ] Configure auto-formatting across languages  
+- [ ] Ghostty tweaks:  
+  - [ ] Split management keybinds  
+  - [ ] Tab management keybinds  
 
+## 📝 License  
+This project is licensed under the [MIT License](LICENSE).  
 
----
-this scratchpad is for me to keep track of the todos in one spot heehee
-
-- [ ] fix vale its giving exit code 2
-- [ ] read and configure the lsp properly
-- [ ] implement code folding
-- [ ] read and implement the linters for everything
-- [ ] configure the auto formatter to work with all the languages. 
- - [ ] ghostty also needs some twweakin:
-    - [ ] split management keybinds. 
-    - [ ] tab management keybinds.
+lol (lots of love) ❤️  
