@@ -411,13 +411,14 @@ return {
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Buffers' })
       vim.keymap.set('n', '<leader>?', builtin.keymaps, { desc = 'Fuzzy find keybinds (cheat sheet)' })
 
-      -- Project switching (tab-scoped: each tab = one project)
+      -- Project switching (tab-scoped). In picker: Esc then <leader>d delete, <leader>f find, <leader>s grep
+      local project_picker = require 'project_picker'
       vim.keymap.set('n', '<leader>pp', function()
         vim.cmd.tabnew()
-        require('telescope').extensions.projects.projects {}
+        project_picker.open()
       end, { desc = '[P]roject: open in new tab' })
       vim.keymap.set('n', '<leader>ps', function()
-        require('telescope').extensions.projects.projects {}
+        project_picker.open()
       end, { desc = '[P]roject: switch in current tab' })
 
       -- Slightly advanced example of overriding default behavior and theme

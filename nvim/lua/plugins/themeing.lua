@@ -36,7 +36,7 @@ return {
         dashboard.button('e', '  New file', '<cmd>ene<CR>'),
         dashboard.button('f', '󰱼 Find file', '<cmd>Telescope find_files<CR>'),
         dashboard.button('g', '  File explorer', '<cmd>Neotree toggle<CR>'),
-        dashboard.button('p', '󰉋  Open project', '<cmd>tabnew | lua require("telescope").extensions.projects.projects{}<CR>'),
+        dashboard.button('p', '󰉋  Open project', '<cmd>lua require("project_picker").open()<CR>'),
         dashboard.button('s', '󰙅  Settings (config)', "<cmd>lua require('telescope.builtin').find_files({cwd=vim.fn.stdpath('config')})<CR>"),
         dashboard.button('?', '  Keybind cheat sheet', '<cmd>Telescope keymaps<CR>'),
         dashboard.button('r', '󰁯  Restore session', '<cmd>SessionSearch<CR>'),
@@ -57,12 +57,19 @@ return {
         section_separators = { left = '', right = '' },
       },
       sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = { 'filename' },
-        lualine_x = { 'encoding', 'fileformat', 'filetype' },
-        lualine_y = { 'progress' },
-        lualine_z = { 'location' },
+        lualine_a = {
+          -- Project name (folder) before mode, with triangular separator
+          function()
+            local cwd = vim.fn.getcwd()
+            return vim.fn.fnamemodify(cwd, ':t') or ''
+          end,
+          padding = { left = 1, right = 1 },
+        },
+        lualine_b = { 'mode' },
+        lualine_c = { 'branch', 'diff', 'diagnostics' },
+        lualine_x = { 'filename' },
+        lualine_y = { 'encoding', 'fileformat', 'filetype' },
+        lualine_z = { 'progress', 'location' },
       },
     },
   },
