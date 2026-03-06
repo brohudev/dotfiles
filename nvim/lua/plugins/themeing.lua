@@ -59,11 +59,13 @@ return {
       sections = {
         lualine_a = {
           -- Project name (folder) before mode, with triangular separator
-          function()
-            local cwd = vim.fn.getcwd()
-            return vim.fn.fnamemodify(cwd, ':t') or ''
-          end,
-          padding = { left = 1, right = 1 },
+          {
+            function()
+              local cwd = vim.fn.getcwd()
+              return vim.fn.fnamemodify(cwd, ':t') or ''
+            end,
+            padding = { left = 1, right = 1 },
+          },
         },
         lualine_b = { 'mode' },
         lualine_c = { 'branch', 'diff', 'diagnostics' },

@@ -23,7 +23,8 @@ local function create_finder()
       local name = vim.fn.fnamemodify(entry, ':t')
       return {
         display = function(e)
-          return displayer({ e.name, { e.value, 'Comment' } })
+          -- Use Directory highlight for project name so it's visible (Comment can blend with bg)
+          return displayer({ { e.name, 'Directory' }, { e.value, 'Comment' } })
         end,
         name = name,
         value = entry,
@@ -70,9 +71,18 @@ function M.open(opts)
       if not entry then
         return
       end
-      local choice = vim.fn.confirm("Delete '" .. entry.value .. "' from project list?", '&Yes\n&No', 2)
+      local path = entry.value
+      local choice = vim.fn.confirm("Delete '" .. path .. "' from project list?", '&Yes\n&No', 2)
       if choice == 1 then
         history.delete_project(entry)
+        -- Also remove from session_projects (e.g. temp added via <leader>pa or auto-detection)
+        local new_session = {}
+        for _, p in ipairs(history.session_projects) do
+          if p ~= path then
+            table.insert(new_session, p)
+          end
+        end
+        history.session_projects = new_session
         state.get_current_picker(prompt_bufnr):refresh(create_finder(), { reset_prompt = true })
       end
     end
@@ -110,6 +120,7 @@ function M.open(opts)
     return true
   end
 
+  opts.finder = create_finder()
   ext.projects(opts)
 end
 

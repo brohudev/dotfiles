@@ -42,6 +42,14 @@ vim.keymap.set('n', '<leader>pd', function()
     end
   end
   history.delete_project { value = cwd }
+  -- Also remove from session_projects (e.g. temp added via <leader>pa)
+  local new_session = {}
+  for _, p in ipairs(history.session_projects) do
+    if p ~= cwd then
+      table.insert(new_session, p)
+    end
+  end
+  history.session_projects = new_session
   vim.notify(found and ('Removed: ' .. cwd) or 'Not in project list', vim.log.levels.INFO)
 end, { desc = '[P]roject: [D]elete current from list' })
 
