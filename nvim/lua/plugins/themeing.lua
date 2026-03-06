@@ -5,12 +5,12 @@ return {
     priority = 1000,
     config = function()
       require('onedarkpro').setup {
-        theme = 'onedark_dark',
+        theme = 'onedark',
         options = {
           cursorline = true,
         },
       }
-      vim.cmd.colorscheme 'onedark_dark'
+      vim.cmd.colorscheme 'onedark'
       vim.cmd.hi 'Comment gui=none'
     end,
   },
@@ -36,6 +36,7 @@ return {
         dashboard.button('e', '  New file', '<cmd>ene<CR>'),
         dashboard.button('f', '󰱼 Find file', '<cmd>Telescope find_files<CR>'),
         dashboard.button('g', '  File explorer', '<cmd>Neotree toggle<CR>'),
+        dashboard.button('p', '󰉋  Open project', '<cmd>tabnew | lua require("telescope").extensions.projects.projects{}<CR>'),
         dashboard.button('s', '󰙅  Settings (config)', "<cmd>lua require('telescope.builtin').find_files({cwd=vim.fn.stdpath('config')})<CR>"),
         dashboard.button('?', '  Keybind cheat sheet', '<cmd>Telescope keymaps<CR>'),
         dashboard.button('r', '󰁯  Restore session', '<cmd>SessionSearch<CR>'),
@@ -81,6 +82,7 @@ return {
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]ab' },
         { '<leader>w', group = '[W]indow' },
+        { '<leader>p', group = '[P]roject' },
         { '<leader>x', group = 'Session' },
       },
     },

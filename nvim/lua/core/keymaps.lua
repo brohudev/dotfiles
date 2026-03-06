@@ -29,6 +29,18 @@ vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<CR>', { desc = '[B]uffer [D]elet
 vim.keymap.set('n', '<leader>tn', '<cmd>tabnext<CR>', { desc = '[T]ab [N]ext' })
 vim.keymap.set('n', '<leader>tp', '<cmd>tabprevious<CR>', { desc = '[T]ab [P]revious' })
 
+-- Add current folder as project (shows in <leader>pp picker)
+vim.keymap.set('n', '<leader>pa', function()
+  local project = require 'project_nvim.project'
+  local history = require 'project_nvim.utils.history'
+  local cwd = vim.fn.getcwd()
+  if vim.fn.isdirectory(cwd) == 1 then
+    table.insert(history.session_projects, cwd)
+    project.set_pwd(cwd, 'manual')
+    vim.notify('Added project: ' .. cwd, vim.log.levels.INFO)
+  end
+end, { desc = '[P]roject: [A]dd current folder' })
+
 -- Run commands (edit nvim/lua/run_commands.lua to customize)
 vim.keymap.set('n', '<leader>rr', function()
   require('run_commands').pick()
