@@ -133,30 +133,21 @@ return {
       },
     },
   },
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
-    main = 'ibl',
-    opts = {
-      indent = { char = '┊' },
-    },
-  },
-  { -- Linting
+  { -- Linting (markdownlint removed - requires `npm i -g markdownlint-cli`, was causing ENOENT)
     'mfussenegger/nvim-lint',
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lint = require 'lint'
-      lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
-      }
+      lint.linters_by_ft = {}
+      -- Add markdown only if markdownlint-cli is installed:
+      if vim.fn.executable 'markdownlint' == 1 then
+        lint.linters_by_ft.markdown = { 'markdownlint' }
+      end
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+      vim.api.nvim_create_autocmd({ 'BufWritePost', 'InsertLeave' }, {
         group = lint_augroup,
         callback = function()
-          -- Only run the linter in buffers that you can modify in order to
-          -- avoid superfluous noise, notably within the handy LSP pop-ups that
-          -- describe the hovered symbol using Markdown.
-          if vim.opt_local.modifiable:get() then
+          if vim.opt_local.modifiable:get() and lint.linters_by_ft[vim.bo.filetype] then
             lint.try_lint()
           end
         end,
