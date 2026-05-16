@@ -38,7 +38,6 @@ return {
         dashboard.button('g', '  File explorer', '<cmd>Neotree toggle<CR>'),
         dashboard.button('s', '󰙅  Settings (config)', "<cmd>lua require('telescope.builtin').find_files({cwd=vim.fn.stdpath('config')})<CR>"),
         dashboard.button('?', '  Keybind cheat sheet', '<cmd>Telescope keymaps<CR>'),
-        dashboard.button('r', '󰁯  Restore session', '<cmd>SessionSearch<CR>'),
         dashboard.button('q', '  Quit', '<cmd>qa<CR>'),
       }
 
@@ -81,7 +80,6 @@ return {
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]ab' },
         { '<leader>w', group = '[W]indow' },
-        { '<leader>x', group = 'Session' },
       },
     },
   },

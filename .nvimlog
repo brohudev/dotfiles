@@ -1,1 +1,2 @@
 WRN 2026-03-05T18:37:36.576 ?.161778   server_start:199: Failed to start server: permission denied: /run/user/1000/
+WRN 2026-05-16T16:11:07.911 ?.142273   server_start:199: Failed to start server: no such file or directory: /run/user/1000/
