@@ -388,6 +388,7 @@ return {
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
+      vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = '[F]ind files' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch [G]rep (codebase)' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch [W]ord under cursor' })

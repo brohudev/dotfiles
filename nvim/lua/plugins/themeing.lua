@@ -74,7 +74,6 @@ return {
         { '<leader>b', group = '[B]uffer' },
         { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
-        { '<leader>f', group = '[F]ormat' },
         { '<leader>g', group = '[G]it' },
         { '<leader>r', group = '[R]un / [R]ename' },
         { '<leader>s', group = '[S]earch' },
