@@ -39,7 +39,7 @@ stow -t ~/.config kitty nvim ghostty tmux
 ln -s ~/.config/tmux/sessionizer ~/.local/bin/tmux-sessionizer
 
 # install fzf (required by sessionizer)
-sudo dnf install fzf tmux
+$$sudo dnf install fzf tmux
 ```
 
 ## ✅ TODO  
