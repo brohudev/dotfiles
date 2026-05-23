@@ -6,9 +6,11 @@
 # Install: ln -s ~/.config/tmux/sessionizer ~/.local/bin/tmux-sessionizer
 #          chmod +x ~/.local/bin/tmux-sessionizer
 
-selected=$(find \
-  ~/projects \
-  -mindepth 2 -maxdepth 2 -type d 2>/dev/null \
+selected=$({
+  find "$HOME/projects" -mindepth 1 -maxdepth 1 -type d ! -path "$HOME/projects/personal"
+  find "$HOME/projects/personal" -mindepth 1 -maxdepth 1 -type d
+} 2>/dev/null \
+  | sort -u \
   | fzf --prompt="  project: " \
         --border=rounded \
         --height=40% \
